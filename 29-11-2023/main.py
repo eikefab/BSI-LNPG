@@ -19,13 +19,6 @@ def main():
         name = input("Nome: ")
 
         if name == '0':
-            print("Programa encerrado, dados salvos.")
-
-            break
-            
-        name = input("Nome: ")
-
-        if name == '0':
             print("Programa encerrado.")
 
             break
@@ -38,7 +31,6 @@ def main():
             age = input("Idade: ")
         
         age = int(age)
-
         sex = input("Sexo (M ou F): ").upper()
 
         while sex not in ['M', 'F']:
