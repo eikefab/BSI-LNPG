@@ -48,13 +48,12 @@ def build(parent: Toplevel, window: Frame):
 
     def add_album(event):
         controller.create_album(album.get(), int(release_year.get()), author.get(), (debut.get() == 1))
-
+        parent.title(f'Álbum {album.get()} salvo!')
+        
         album.set("")
         release_year.set("")
         author.set("")
         debut.set(0)
-
-        parent.title(f'Álbum {album.get()} salvo!')
 
     register_button.bind('<Button-1>', add_album)
     register_button.bind('<Return>', add_album)
