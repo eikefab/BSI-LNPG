@@ -1,6 +1,6 @@
 # Teste
 
-TBD
+* Para testar, basta rodar `py init.py` na linha de comando.
 
 ## Atividade
 

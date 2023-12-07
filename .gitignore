@@ -1,4 +1,6 @@
-*/.pyc
-*/.env
-*/node_modules/
-*/.idea/
+.pyc
+.env
+
+__pycache__/
+node_modules/
+.idea/
