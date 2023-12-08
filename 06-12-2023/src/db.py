@@ -18,4 +18,4 @@ def index():
 
 def register(album: str, release_year: int, author: str, debut: bool):
     with open(path, 'a') as file:
-        file.write(f"{album}\t{release_year}\t{author}\t{debut}\n")
+        file.write(f"\n{album}\t{release_year}\t{author}\t{debut}\n")
