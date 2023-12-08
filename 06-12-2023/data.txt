@@ -7,3 +7,9 @@ Master of Puppets	1986	Metallica	False
 St. Anger	2003	Metallica	False
 Load	1996	Metallica	False
 Fear of the Dark	1992	Iron Maiden	False
+
+Teste	2005	Teste	False
+
+Teste Validação	2000	Teste	False
+
+Teste 2	2000	Teste 2	True

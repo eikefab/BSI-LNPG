@@ -1,16 +1,46 @@
 import db
 
-def create_album(album: str, release_year: int, author: str, debut: bool):
+
+def create_album(album: str, release_year: str, author: str, debut: bool, alert):
+    if len(album) == 0:
+        alert("O título do álbum não pode ser vazio!")
+
+        return False
+
+    if not release_year.isdigit():
+        alert("O ano do álbum deve ser um ano válido!")
+
+        return False
+
+    if len(author) == 0:
+        alert("O autor do álbum não pode ser vazio!")
+
+        return False
+
     db.register(album, release_year, author, debut)
+
+    alert(f"Álbum {album} criado!")
+
+    return True
+
 
 def list_albums():
     return db.index()
 
-def sort_albums(data = [], by: int = 0, descending: bool = False):
+
+def sort_albums(data=[], by: int = 0, descending: bool = False):
+    if len(data) == 0:
+        return []
+    
+    if by > len(data[0]):
+        return []
+
     return sorted(data, key=lambda item: item[by], reverse=descending)
+
 
 def list_albums_sorted(by: int = 0, descending: bool = False):
     return sorted(list_albums(), key=lambda item: item[by], reverse=descending)
+
 
 def get_albums_by_author(author: str):
     albums = []
@@ -21,6 +51,7 @@ def get_albums_by_author(author: str):
 
     return albums
 
+
 def get_albums_by_year(year: int):
     albums = []
 
@@ -29,6 +60,7 @@ def get_albums_by_year(year: int):
             albums.append(data)
 
     return albums
+
 
 def filter_albums_by_year(year: int, greater: bool = False):
     albums = []

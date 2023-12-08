@@ -4,9 +4,7 @@
 
 ## Resultados
 
-* ![Menu inicial](https://i.imgur.com/r6HPUhA.png)
-* ![Adicionar álbum](https://i.imgur.com/NFrKlOc.png)
-* ![Listar álbuns](https://i.imgur.com/CCKSvup.gif)
+![Resultados](https://i.imgur.com/90nfgMn.gif)
 
 ### Atividade
 
