@@ -1,12 +1,12 @@
 # Teste
 
-* Para testar, basta rodar `py init.py` na linha de comando.
+* Para testar, basta rodar `py src/init.py` na linha de comando.
 
 ## Resultados
 
 * ![Menu inicial](https://i.imgur.com/r6HPUhA.png)
 * ![Adicionar álbum](https://i.imgur.com/NFrKlOc.png)
-* ![Listar álbuns](https://i.imgur.com/L7kVaV8.png)
+* ![Listar álbuns](https://i.imgur.com/CCKSvup.gif)
 
 ### Atividade
 
