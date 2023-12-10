@@ -1,78 +1,35 @@
+from utils import Album
+from typing import Callable
+
 import db
 
 
-def create_album(album: str, release_year: str, author: str, debut: bool, alert):
-    if len(album) == 0:
-        alert("O título do álbum não pode ser vazio!")
+def add(name: str, year: str | int, author: str, debut: int | bool = False) -> Album:
+    """
+    Validates all data and then writes it into the file
+    """
 
-        return False
+    if name.isspace() or len(name) == 0:  # Validates album's name
+        raise ValueError("Nome do álbum não pode ser vazio!")
 
-    if not release_year.isdigit():
-        alert("O ano do álbum deve ser um ano válido!")
+    if not year.isdigit():  # Validate album's release year
+        raise ValueError("Ano de lançamento deve ser um número!")
 
-        return False
+    if author.isspace() or len(author) == 0:  # Validate album's author name
+        raise ValueError("Nome do artista/banda não pode ser vazio!")
 
-    if len(author) == 0:
-        alert("O autor do álbum não pode ser vazio!")
-
-        return False
-
-    db.register(album, release_year, author, debut)
-
-    alert(f"Álbum {album} criado!")
-
-    return True
+    return db.write(Album(name, year, author, debut))  # Writes it to the file
 
 
-def list_albums():
-    return db.index()
+def get(filter: Callable[[Album], bool] = (lambda _: True), order: Callable[[Album], any] = (lambda album: album.name)) -> list[Album]:
+    """
+    Returns all registered albums that matches the filter
+    """
 
+    albums: list[Album] = []
 
-def sort_albums(data=[], by: int = 0, descending: bool = False):
-    if len(data) == 0:
-        return []
-    
-    if by > len(data[0]):
-        return []
+    for album in db.index():
+        if filter(album):  # Applies filter
+            albums.append(album)  # Add those that matches it
 
-    return sorted(data, key=lambda item: item[by], reverse=descending)
-
-
-def list_albums_sorted(by: int = 0, descending: bool = False):
-    return sorted(list_albums(), key=lambda item: item[by], reverse=descending)
-
-
-def get_albums_by_author(author: str):
-    albums = []
-
-    for data in list_albums():
-        if author.lower() in data[2].lower():
-            albums.append(data)
-
-    return albums
-
-
-def get_albums_by_year(year: int):
-    albums = []
-
-    for data in list_albums():
-        if year == int(data[1]):
-            albums.append(data)
-
-    return albums
-
-
-def filter_albums_by_year(year: int, greater: bool = False):
-    albums = []
-
-    for data in list_albums():
-        release_year = int(data[1])
-
-        if greater:
-            if release_year >= year:
-                albums.append(data)
-        else:
-            if release_year <= year:
-                albums.append(data)
-
-    return albums
+    return sorted(albums, key=order)

@@ -1,6 +1,6 @@
 # Teste
 
-* Para testar, basta rodar `py src/init.py` na linha de comando.
+* Para testar, basta rodar `py src` na linha de comando.
 
 ## Resultados
 

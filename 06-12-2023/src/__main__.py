@@ -1,8 +1,8 @@
-import menus
+import gui
 
 
 def __init__():
-    menus.open()
+    gui.open()  # Opens up the initial GUI
 
 
 if __name__ == "__main__":

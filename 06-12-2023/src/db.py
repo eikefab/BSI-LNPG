@@ -1,23 +1,38 @@
-path = "data.txt"
+from utils import Album
 
 
-def index():
-    data = []
+file_path = "data.txt" # File where all previous data were written
 
-    with open(path, "r") as file:
+
+def index() -> list[Album]:
+    """
+    Returns all registered albums
+    """
+
+    albums: list[Album] = []
+
+    with open(file_path, "r") as file:
         raw = file.read()
 
         for line in raw.split("\n"):
             info = line.split("\t")
 
-            if len(info) < 4:
+            if len(info) < 4:  # Check if it's not a empty line nor invalid info
                 continue
 
-            data.append(info)
+            name, year, author, debut = info  # Decomposes the info
 
-    return data
+            albums.append(Album(name, year, author, debut))
+
+    return albums
 
 
-def register(album: str, release_year: int, author: str, debut: bool):
-    with open(path, "a") as file:
-        file.write(f"\n{album}\t{release_year}\t{author}\t{debut}\n")
+def write(album: Album) -> Album:
+    """
+    Writes album data to file
+    """
+
+    with open(file_path, "a") as file:
+        file.write(f"\n{album.name}\t{album.year}\t{album.author}\t{album.debut}\n")
+
+    return album
