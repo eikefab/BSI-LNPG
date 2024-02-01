@@ -1,5 +1,3 @@
-module Main where
-
 main :: IO () = do
     putStrLn "Informe um inteiro: "
     input <- getLine
