@@ -11,4 +11,6 @@ int main() {
     scanf("%d", &celsius);
 
     printf("%dºC é equivalente a %.2fºF\n", celsius, fahrenheit(celsius));
+
+    return 0;
 }
