@@ -12,6 +12,8 @@ public class ConversaoTemperatura {
                 celsius, 
                 fahrenheit(celsius)
             ).println();
+        } catch (Exception exception) {
+            exception.printStackTrace();
         }
     }
 

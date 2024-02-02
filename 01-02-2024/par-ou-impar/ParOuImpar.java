@@ -16,6 +16,8 @@ public class ParOuImpar {
             }
 
             System.out.format("%s é %s.", a, state).println();
+        } catch (Exception exception) {
+            exception.printStackTrace();
         }
     }
 
