@@ -1,4 +1,3 @@
-fahrenheit :: Int -> Float
 fahrenheit a = (fromIntegral a * 1.8) + 32
 
 main :: IO () = do
