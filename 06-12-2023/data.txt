@@ -1,0 +1,15 @@
+Black Holes	2016	The Blue Stones	True
+Hidden Gems	2021	The Blue Stones	False
+Pretty Monster	2022	The Blue Stones	False
+Delta Kream	2021	The Black Keys	False
+Turn Blue	2014	The Black Keys	False
+Master of Puppets	1986	Metallica	False
+St. Anger	2003	Metallica	False
+Load	1996	Metallica	False
+Fear of the Dark	1992	Iron Maiden	False
+
+Teste	2005	Teste	False
+
+Teste Validação	2000	Teste	False
+
+Teste 2	2000	Teste 2	True
