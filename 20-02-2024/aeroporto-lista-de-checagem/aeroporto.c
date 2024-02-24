@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 
-int handlePassenger(int current, int pax) { // A consertar
+int handlePassenger(int current, int pax) {
     if (current == pax) {
         return 0;
     }
@@ -14,9 +14,6 @@ int handlePassenger(int current, int pax) { // A consertar
     fgets(rg, sizeof rg, stdin);
     rg[strcspn(rg, "\n")] = 0;
 
-    puts(rg);
-    printf("%d", strcmp(rg, "Nao possui"));
-
     if (strcmp(rg, "Nao possui") == 0) {
         printf("\nA saída é nessa direção.\n");
 
@@ -25,16 +22,14 @@ int handlePassenger(int current, int pax) { // A consertar
 
     printf("Data de nascimento (RG): ");
     scanf("%s", birthdate);
+    getchar();
 
     printf("Passagem (ou 'Nao possui'): ");
     
     fgets(ticket, sizeof ticket, stdin);
     ticket[strcspn(rg, "\n")] = 0;
 
-    puts(ticket);
-    printf("%d", strcmp(ticket, "Nao possui"));
-
-    if (strcmp(ticket, "Nao possui") == 0) {
+    if (strcmp(ticket, "Nao possui") == -111) { // Sempre retorna -111, a investigar.
         printf("\nA recepção é nessa direção.\n");
 
         return handlePassenger((current + 1), pax);
