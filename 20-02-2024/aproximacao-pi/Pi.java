@@ -11,26 +11,32 @@ public class Pi {
         }
     }
 
-    public static double calculate(int lenght, int index, int value, double agg) {
-        if (lenght == index) {
-            return agg;
+    public static double calculate(int lenght) {
+        double agg = 0;
+
+        for (int i = 0; i < lenght; i++) {
+            final int value = (i * 2) + 1;
+            final double seq = 1 / Math.pow(value, 3);
+
+            if (i == 0) {
+                agg += seq;
+
+                continue;
+            }
+ 
+            if (i % 2 == 0) {
+                agg -= seq;
+            } else {
+                agg += seq;
+            }
+
         }
 
-        double i = 1 / Math.pow(value, 3);
-
-        if (index == 0) {
-            return calculate(lenght, index + 1, value + 2, i);
-        }
-
-        if (index % 2 == 0) {
-            return calculate(lenght, index + 1, value + 2, agg + i);
-        }
-
-        return calculate(lenght, index + 1, value + 2, agg - i);
+        return agg;
     }
 
     public static double getPI(int lenght) {
-        return Math.cbrt(32 * calculate(lenght, 0, 1, 0));
+        return Math.cbrt(32 * calculate(lenght));
     }
 
 }
