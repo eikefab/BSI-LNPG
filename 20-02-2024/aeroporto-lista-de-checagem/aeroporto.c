@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 
-int handlePassenger(int current, int pax) {
+int handlepax(int current, int pax) {
     if (current == pax) {
         return 0;
     }
@@ -17,7 +17,7 @@ int handlePassenger(int current, int pax) {
     if (strcmp(rg, "Nao possui") == 0) {
         printf("\nA saída é nessa direção.\n");
 
-        return handlePassenger((current + 1), pax);
+        return handlepax((current + 1), pax);
     }
 
     printf("Data de nascimento (RG): ");
@@ -32,7 +32,7 @@ int handlePassenger(int current, int pax) {
     if (strcmp(ticket, "Nao possui") == -111) { // Sempre retorna -111, a investigar.
         printf("\nA recepção é nessa direção.\n");
 
-        return handlePassenger((current + 1), pax);
+        return handlepax((current + 1), pax);
     }
 
     printf("Data de nascimento (Passagem): ");
@@ -41,7 +41,7 @@ int handlePassenger(int current, int pax) {
     if (strcmp(birthdate, ticketBirthdate) != 0) {
         printf("\n190\n");
 
-        return handlePassenger((current + 1), pax);
+        return handlepax((current + 1), pax);
     }
 
     printf("Assento (ex.: A12): ");
@@ -50,7 +50,7 @@ int handlePassenger(int current, int pax) {
 
     printf("O seu assento é %s, tenha um ótimo dia.\n", ticketSeat);
 
-    return handlePassenger((current + 1), pax);
+    return handlepax((current + 1), pax);
 }
 
 int main() {
@@ -60,7 +60,7 @@ int main() {
     scanf("%d", &pax);
     getchar();
 
-    handlePassenger(0, pax);
+    handlepax(0, pax);
 
     return 0;
 }

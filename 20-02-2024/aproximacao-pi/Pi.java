@@ -7,7 +7,7 @@ public class Pi {
             System.out.println("Informe o número de termos: ");
             final int lenght = scanner.nextInt();
 
-            System.out.println(String.format("%,.5f", getPI(lenght)));
+            System.out.println(String.format("%.5f", getPI(lenght)));
         }
     }
 
