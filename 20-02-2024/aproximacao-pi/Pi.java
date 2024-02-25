@@ -11,10 +11,10 @@ public class Pi {
         }
     }
 
-    public static double calculate(int lenght) {
+    public static double calculate(int length) {
         double agg = 0;
 
-        for (int i = 0; i < lenght; i++) {
+        for (int i = 0; i < length; i++) {
             final int value = (i * 2) + 1;
             final double seq = 1 / Math.pow(value, 3);
 
@@ -35,8 +35,8 @@ public class Pi {
         return agg;
     }
 
-    public static double getPI(int lenght) {
-        return Math.cbrt(32 * calculate(lenght));
+    public static double getPI(int length) {
+        return Math.cbrt(32 * calculate(length));
     }
 
 }

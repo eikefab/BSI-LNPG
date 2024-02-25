@@ -1,14 +1,14 @@
 import Text.Printf (printf)
 
-calc lenght index agg
-    | lenght == index = agg
+calc length index agg
+    | length == index = agg
     | otherwise =
         let seq = 1 / (fromIntegral value ^ 3)
         in if index == 0
-                then calc lenght (index + 1) seq
+                then calc length (index + 1) seq
                 else if even index
-                    then calc lenght (index + 1) (agg + seq)
-                    else calc lenght (index + 1) (agg - seq)
+                    then calc length (index + 1) (agg + seq)
+                    else calc length (index + 1) (agg - seq)
     where value = (index * 2) + 1
 
 calcPi n = (calc n 0 0 * 32) ** (1 / 3)

@@ -27,9 +27,9 @@ int handlepax(int current, int pax) {
     printf("Passagem (ou 'Nao possui'): ");
     
     fgets(ticket, sizeof ticket, stdin);
-    ticket[strcspn(rg, "\n")] = 0;
+    ticket[strcspn(ticket, "\n")] = 0;
 
-    if (strcmp(ticket, "Nao possui") == -111) { // Sempre retorna -111, a investigar.
+    if (strcmp(ticket, "Nao possui") == 0) {
         printf("\nA recepção é nessa direção.\n");
 
         return handlepax((current + 1), pax);

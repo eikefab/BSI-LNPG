@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <math.h>
 
-double calc(int lenght, int index, double agg) {
-    if (lenght == index) {
+double calc(int length, int index, double agg) {
+    if (length == index) {
         return agg;
     }
 
@@ -10,14 +10,14 @@ double calc(int lenght, int index, double agg) {
     double seq = 1 / pow(value, 3);
 
     if (index == 0) {
-        return calc(lenght, (index + 1), seq);
+        return calc(length, (index + 1), seq);
     }
 
     if (index % 2 == 0) {
-        return calc(lenght, (index + 1), agg + seq);
+        return calc(length, (index + 1), agg + seq);
     }
 
-    return calc(lenght, (index + 1), agg - seq);
+    return calc(length, (index + 1), agg - seq);
 }
 
 int main() {
