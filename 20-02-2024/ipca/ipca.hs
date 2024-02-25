@@ -64,8 +64,8 @@ main :: IO () = do
     let peakIpcaMonth = head peakIpcaDate
     let peakIpcaYear = last peakIpcaDate
 
-    printf "%.2f" peakIpcaValue
-    putStrLn ("% " ++ show peakIpcaMonth ++ "/" ++ show peakIpcaYear)
+    printf "%.2f%% " peakIpcaValue
+    putStrLn (show peakIpcaMonth ++ "/" ++ show peakIpcaYear)
 
     let bottomIpca = bottom ipca 0 peakIpcaValue peakIpca
 
@@ -75,10 +75,9 @@ main :: IO () = do
     let bottomIpcaMonth = head bottomIpcaDate
     let bottomIpcaYear = last bottomIpcaDate
 
-    printf "%.2f" bottomIpcaValue
-    putStrLn ("% " ++ show bottomIpcaMonth ++ "/" ++ show bottomIpcaYear)
+    printf "%.2f%% " bottomIpcaValue
+    putStrLn (show bottomIpcaMonth ++ "/" ++ show bottomIpcaYear)
     
     let avgIpca = avg ipca
 
-    printf "%.2f" avgIpca
-    putStrLn "%"
+    printf "%.2f%%\n" avgIpca

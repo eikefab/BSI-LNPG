@@ -9,19 +9,11 @@ typedef struct IpcaItem {
 } IpcaItem;
 
 int max(int a, int b) {
-    if (a > b) {
-        return a;
-    }
-
-    return b;
+    a > b ? a : b;
 }
 
 int min(int a, int b) {
-    if (a < b) {
-        return a;
-    }
-
-    return b;
+    return a > b ? b : a;
 }
 
 int handle() {
