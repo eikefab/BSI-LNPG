@@ -62,4 +62,4 @@ main :: IO () = do
     let midAmount = mid results answers :: Double
 
     printf "%.2f%%" midAmount
-    putStrLn " acertaram mais que a metade."
+    putStrLn " acertaram mais da metade."

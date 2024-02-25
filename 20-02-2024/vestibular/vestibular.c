@@ -2,25 +2,88 @@
 #include <string.h>
 #include <stdlib.h>
 
-void getanswers(int *answers[10]) {
-    char ref[255];
+typedef struct Student {
+    char name[255];
+    int score;
+} Student;
 
-    fgets(ref, sizeof ref, stdin);
-    ref[strcspn(ref, "\n")] = 0;
+int len(int a[255]) {
+    int i = 0;
 
-    char *token = strtok(ref, " ");
+    for (int j = 0; j < 255; j++) {
+        int k = a[j];
+
+        if (k == -1) {
+            continue;
+        }
+
+        i += 1;
+    }
+
+    return i;
+}
+
+int matchAnswers(int origin[255], int compare[255]) {
+    int originLength = len(origin);
+    int compareLength = len(compare);
+
+    if (originLength != compareLength) {
+        return -1;
+    }
+
+    int match = 0;
+
+    for (int i = 0; i < originLength; i++) {
+        int a = origin[i];
+        int b = compare[i];
+
+        if (a == b) {
+            if (a == -1) {
+                continue;
+            }
+
+            match += 1;
+        }
+    }
+
+    return match;
+}
+
+int *fetchAnswers() {
+    static int *answers;
+    answers = malloc(255 * sizeof(int));
+
+    for (int i = 0; i < 255; i++) {
+        answers[i] = -1;
+    }
+
+    char line[255];
+
+    fgets(line, sizeof line, stdin);
+    line[strcspn(line, "\n")] = 0;
+
+    char *token = strtok(line, " ");
     int cursor = 0;
 
     while (token != NULL) {
-        int value = atoi(token);
-        answers[cursor] = value;
+        answers[cursor] = atoi(token);
 
         token = strtok(NULL, " ");
         cursor += 1;
     }
+
+    return answers;
 }
 
-void getstudents(char *names[255][255], int *scores[255], int correct[10]) {
+Student *fetchStudents(int correct[255]) {
+    static Student *students;
+    students = malloc(255 * sizeof(Student));
+
+    for (int i = 0; i < 255; i++) {
+        strcpy(students[i].name, "");
+        students[i].score = -1;
+    }
+
     char name[255];
 
     fgets(name, sizeof name, stdin);
@@ -29,111 +92,98 @@ void getstudents(char *names[255][255], int *scores[255], int correct[10]) {
     int cursor = 0;
 
     while (strcmp(name, "*") != 0) {
-        int answers[10] = {};
+        int *answers = fetchAnswers();
 
-        getanswers(&answers);
+        int score = matchAnswers(answers, correct);
 
-        strcpy(names[cursor], name);
-        scores[cursor] = match(correct, answers);
+        free(answers);
 
-        cursor += 1;
+        strcpy(students[cursor].name, name);
+        students[cursor].score = score;
 
         fgets(name, sizeof name, stdin);
         name[strcspn(name, "\n")] = 0;
+
+        cursor += 1;
     }
+
+    return students;
 }
 
-int match(int correct[10], int answers[10]) {
-    int i = 0;
+Student topStudent(Student students[255]) {
+    Student student = {};
+    int score = 0;
 
-    for (int j = 0; j < 10; j++) {
-        int k = correct[j];
-        int l = answers[j];
+    for (int i = 0; i < 255; i++) {
+        Student comparison = students[i];
 
-        if (k == l) {
-            if (k == 0) {
-                continue;
-            }
-
-            i += 1;
+        if (comparison.score > score) {
+            student = comparison;
+            score = comparison.score;
         }
     }
 
-    return i;
+    return student;
 }
 
-int studentslen(int scores[255]) {
-    int len = 0;
+Student bottomStudent(Student students[255], int topScore) {
+    Student student = {};
+    int score = topScore;
 
-    for (int i = 0; i < sizeof scores; i++) {
-        if (scores[i] == -1) {
+    for (int i = 0; i < 255; i++) {
+        Student comparison = students[i];
+
+        if (comparison.score == -1) {
             continue;
         }
 
-        len += 1;
-    }
-
-    return len;
-}
-
-int topindex(char names[255][255], int scores[255]) {
-    int temp = 0;
-    int cursor = 0;
-
-    int len = studentslen(names);
-
-    for (int i = 0; i < len; i++) {
-        int score = scores[i];
-
-        if (score > temp) {
-            temp = score;
-            cursor = i;
+        if (score > comparison.score) {
+            student = comparison;
+            score = comparison.score;
         }
     }
 
-    return cursor;
+    return student;
 }
 
-int botindex(char names[255][255], int scores[255], int topindex) {
-    int temp = scores[topindex];
-    int cursor = topindex;
+float getPercentage(int answers[255], Student students[255]) {
+    int count = 0;
+    int total = 0;
 
-    int len = studentslen(names);
+    for (int i = 0; i < 255; i++) {
+        Student student = students[i];
 
-    for (int i = 0; i < len; i++) {
-        int score = scores[i];
+        if (student.score == -1) {
+            continue;
+        }
 
-        if (score < temp) {
-            temp = score;
-            cursor = i;
+        total += 1;
+
+        if (student.score > (len(answers) / 2)) {
+            count += 1;
         }
     }
 
-    return cursor;
+    return (count / (float) total) * 100;
+}
+
+void handle() {
+    int *answers = fetchAnswers();
+    Student *students = fetchStudents(answers);
+
+    Student top = topStudent(students);
+    Student bottom = bottomStudent(students, top.score);
+
+    printf("%s: %d\n", top.name, top.score);
+    printf("%s: %d\n", bottom.name, bottom.score);
+    printf("%.2f%% acertaram mais da metade.\n", getPercentage(answers, students));
+
+    free(answers);
+    free(students);
 }
 
 int main() {
-    int correct[10] = {};
-
-    char names[255][255];
-    int scores[255];
-
-    for (int i = 0; i < sizeof scores; i++) {
-        scores[i] = -1;
-    }
-
-    getanswers(&correct);
-    getstudents(&names, &scores, correct);
-
-    for (int i = 0; i < sizeof scores; i++) {
-        printf("%d\n", scores[i]);
-    }
-
-    int topStudent = topindex(names, scores);
-    int botStudent = botindex(names, scores, topStudent);
-
-    printf("%s: %d", names[topStudent], scores[topStudent]);
-    printf("%s: %d", names[botStudent], scores[botStudent]);
+    handle();
 
     return 0;
 }
